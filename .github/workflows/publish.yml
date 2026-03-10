@@ -51,20 +51,19 @@ jobs:
       - name: Publish to npm
         run: |
           TAG_NAME="${{ github.event.release.tag_name }}"
+          PUBLISH_ARGS=(--access public --provenance)
           if [[ "$TAG_NAME" =~ -(alpha|beta|rc)($|\.) ]]; then
             PRERELEASE_TAG="${BASH_REMATCH[1]}"
             echo "Detected prerelease version, publishing with --tag $PRERELEASE_TAG"
-            PUBLISH_ARGS="--access public --provenance --tag $PRERELEASE_TAG"
-          else
-            PUBLISH_ARGS="--access public --provenance"
+            PUBLISH_ARGS+=(--tag "$PRERELEASE_TAG")
           fi
 
-          npm publish $PUBLISH_ARGS 2>&1 | tee /tmp/npm-publish.log || {
+          npm publish "${PUBLISH_ARGS[@]}" 2>&1 | tee /tmp/npm-publish.log || {
             if grep -q "EOTP" /tmp/npm-publish.log; then
               echo ""
               echo "::error::Publishing failed because your npm token requires a one-time password (OTP)."
               echo "::error::This typically happens when using a Classic 'Publish' token with 2FA enabled."
-              echo "::error::To fix this, generate a new token on https://www.npmjs.com/settings/ :"
+              echo "::error::To fix this, generate a new token on https://www.npmjs.com/settings/:"
               echo "::error::  - Classic Token → select 'Automation' type (bypasses 2FA for CI/CD)"
               echo "::error::  - Or use a Granular Access Token with read-write permission"
               echo "::error::Then update the NPM_TOKEN secret in your repository settings."
