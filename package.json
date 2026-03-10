@@ -1,5 +1,5 @@
 {
-  "name": "@openclaw/soul-evolution",
+  "name": "soul-evolution",
   "version": "1.0.0-beta.1",
   "description": "Automaton-style SOUL.md self-evolution plugin for OpenClaw",
   "type": "module",
@@ -35,7 +35,6 @@
   },
   "license": "MIT",
   "publishConfig": {
-    "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
   "peerDependencies": {
