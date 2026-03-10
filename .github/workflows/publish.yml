@@ -49,6 +49,7 @@ jobs:
         run: npm run build
 
       - name: Publish to npm
+        shell: bash
         run: |
           TAG_NAME="${{ github.event.release.tag_name }}"
           PUBLISH_ARGS=(--access public --provenance)
@@ -64,14 +65,32 @@ jobs:
           set -e
 
           if [ $PUBLISH_EXIT -ne 0 ] || grep -qE "npm (ERR!|error)" /tmp/npm-publish.log; then
+            echo ""
             if grep -q "EOTP" /tmp/npm-publish.log; then
-              echo ""
               echo "::error::Publishing failed because your npm token requires a one-time password (OTP)."
               echo "::error::This typically happens when using a Classic 'Publish' token with 2FA enabled."
               echo "::error::To fix this, generate a new token on https://www.npmjs.com/settings/:"
               echo "::error::  - Classic Token → select 'Automation' type (bypasses 2FA for CI/CD)"
               echo "::error::  - Or use a Granular Access Token with read-write permission"
               echo "::error::Then update the NPM_TOKEN secret in your repository settings."
+            elif grep -q "E404" /tmp/npm-publish.log; then
+              PACKAGE_NAME=$(node -p "require('./package.json').name")
+              SCOPE=$(echo "$PACKAGE_NAME" | grep -oP '^@[^/]+' || true)
+              echo "::error::Publishing failed with 404 Not Found."
+              if [ -n "$SCOPE" ]; then
+                echo "::error::The npm scope '${SCOPE}' does not exist or you do not have permission to publish to it."
+                echo "::error::To fix this:"
+                echo "::error::  1. Create the '${SCOPE}' organization on https://www.npmjs.com/org/create"
+                echo "::error::  2. Or change the package name in package.json to use your own npm scope/username"
+              else
+                echo "::error::The package was not found in the registry. Check the package name in package.json."
+              fi
+            elif grep -q "E403" /tmp/npm-publish.log; then
+              echo "::error::Publishing failed with 403 Forbidden."
+              echo "::error::Possible causes:"
+              echo "::error::  - Your npm token does not have permission to publish this package"
+              echo "::error::  - The package name may already be taken by another user"
+              echo "::error::  - Your npm account may not have the required permissions for the scope"
             else
               echo "::error::npm publish failed. Check the logs above for details."
             fi
