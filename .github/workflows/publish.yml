@@ -75,7 +75,7 @@ jobs:
               echo "::error::Then update the NPM_TOKEN secret in your repository settings."
             elif grep -q "E404" /tmp/npm-publish.log; then
               PACKAGE_NAME=$(node -p "require('./package.json').name")
-              SCOPE=$(echo "$PACKAGE_NAME" | grep -oP '^@[^/]+' || true)
+              SCOPE=$(echo "$PACKAGE_NAME" | sed -n 's|^\(@[^/]*\).*|\1|p')
               echo "::error::Publishing failed with 404 Not Found."
               if [ -n "$SCOPE" ]; then
                 echo "::error::The npm scope '${SCOPE}' does not exist or you do not have permission to publish to it."
