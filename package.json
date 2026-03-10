@@ -3,7 +3,50 @@
   "version": "1.0.0",
   "description": "Automaton-style SOUL.md self-evolution plugin for OpenClaw",
   "type": "module",
-  "dependencies": {},
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "openclaw.plugin.json",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "openclaw",
+    "plugin",
+    "soul",
+    "evolution",
+    "ai-agent",
+    "self-reflection"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/forestlioooooo/soul-evolution.git"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "openclaw": "*"
+  },
+  "peerDependenciesMeta": {
+    "openclaw": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^25.4.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.5"
+  },
   "openclaw": {
     "extensions": [
       "./index.ts"
