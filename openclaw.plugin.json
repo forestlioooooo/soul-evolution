@@ -1,0 +1,25 @@
+{
+  "id": "soul-evolution",
+  "name": "Soul Self-Evolution",
+  "version": "1.0.0",
+  "description": "Automaton-style SOUL.md self-evolution via lifecycle hooks",
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "enabled": { "type": "boolean", "default": true },
+      "maxSoulChars": { "type": "number", "default": 2000 },
+      "evolutionThreshold": {
+        "type": "number",
+        "default": 5,
+        "description": "每 N 次有意义的对话后触发一次灵魂审视"
+      },
+      "autoReflectOnSessionEnd": { "type": "boolean", "default": true }
+    }
+  },
+  "uiHints": {
+    "enabled": { "label": "启用灵魂自进化" },
+    "maxSoulChars": { "label": "SOUL.md 最大字符数" },
+    "evolutionThreshold": { "label": "进化触发阈值（对话轮次）" }
+  }
+}
