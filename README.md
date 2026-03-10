@@ -1,7 +1,7 @@
 # soul-evolution
 
 [![CI](https://github.com/forestlioooooo/soul-evolution/actions/workflows/ci.yml/badge.svg)](https://github.com/forestlioooooo/soul-evolution/actions/workflows/ci.yml)
-[![npm version](https://img.shields.io/npm/v/@openclaw/soul-evolution)](https://www.npmjs.com/package/@openclaw/soul-evolution)
+[![npm version](https://img.shields.io/npm/v/soul-evolution)](https://www.npmjs.com/package/soul-evolution)
 
 Automaton-style SOUL.md self-evolution plugin for OpenClaw 🦞🔮
 
@@ -12,7 +12,7 @@ The **soul-evolution** plugin lets an OpenClaw agent automatically evolve its `S
 ## Installation
 
 ```bash
-npm install @openclaw/soul-evolution
+npm install soul-evolution
 ```
 
 ## Configuration
@@ -24,7 +24,7 @@ Add the plugin to your OpenClaw project's configuration (e.g. `openclaw.config.j
   "plugins": [
     {
       "id": "soul-evolution",
-      "package": "@openclaw/soul-evolution",
+      "package": "soul-evolution",
       "config": {
         "enabled": true,
         "maxSoulChars": 2000,
@@ -81,7 +81,7 @@ Go to [https://www.npmjs.com/login](https://www.npmjs.com/login) and sign in wit
      - **Token name**: give it a descriptive name, e.g. `soul-evolution-github-actions`
      - **Expiration**: choose an appropriate duration
      - **Packages and scopes → Permissions**: select **Read and write**
-     - **Select packages**: choose **Only select packages and scopes**, then add `@openclaw/soul-evolution`
+     - **Select packages**: choose **Only select packages and scopes**, then add `soul-evolution`
      - Click **Generate Token**
    - **Classic Token**:
      - Select the **Automation** type (this bypasses 2FA for CI/CD use)
