@@ -1,7 +1,7 @@
 {
   "id": "soul-evolution",
   "name": "Soul Self-Evolution",
-  "version": "1.0.0",
+  "version": "1.0.0-beta.1",
   "description": "Automaton-style SOUL.md self-evolution via lifecycle hooks",
   "configSchema": {
     "type": "object",
