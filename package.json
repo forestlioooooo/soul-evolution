@@ -1,6 +1,6 @@
 {
   "name": "@openclaw/soul-evolution",
-  "version": "1.0.0",
+  "version": "1.0.0-beta.1",
   "description": "Automaton-style SOUL.md self-evolution plugin for OpenClaw",
   "type": "module",
   "main": "dist/index.js",
