@@ -1,5 +1,8 @@
 # soul-evolution
 
+[![CI](https://github.com/forestlioooooo/soul-evolution/actions/workflows/ci.yml/badge.svg)](https://github.com/forestlioooooo/soul-evolution/actions/workflows/ci.yml)
+[![npm version](https://img.shields.io/npm/v/@openclaw/soul-evolution)](https://www.npmjs.com/package/@openclaw/soul-evolution)
+
 Automaton-style SOUL.md self-evolution plugin for OpenClaw 🦞🔮
 
 ## What It Does
@@ -42,33 +45,19 @@ Add the plugin to your OpenClaw project's configuration (e.g. `openclaw.config.j
 | `evolutionThreshold` | `number` | `5` | Number of meaningful interactions before triggering an evolution log entry |
 | `autoReflectOnSessionEnd` | `boolean` | `true` | Automatically write evolution entries when a session ends |
 
-## Publishing (for contributors)
+## Publishing
 
-1. **Install dependencies**
+Releases are published to npm automatically via GitHub Actions.
 
-   ```bash
-   npm install
-   ```
+To publish a new version:
 
-2. **Build**
+1. Update the version in `package.json` (e.g. `npm version patch`)
+2. Push the version commit and tag (`git push --follow-tags`)
+3. Create a [GitHub Release](https://github.com/forestlioooooo/soul-evolution/releases/new) from the tag
 
-   ```bash
-   npm run build
-   ```
+The **Publish to npm** workflow will run tests, build the package, and publish it to npm with provenance.
 
-3. **Run tests**
-
-   ```bash
-   npm test
-   ```
-
-4. **Publish to npm**
-
-   ```bash
-   npm publish --access public
-   ```
-
-   > The `prepublishOnly` script runs the build automatically before publishing.
+> **Setup**: The repository needs an `NPM_TOKEN` secret configured in **Settings → Secrets and variables → Actions**. Generate a token from [npmjs.com](https://www.npmjs.com/) with *Automation* type.
 
 ## License
 
