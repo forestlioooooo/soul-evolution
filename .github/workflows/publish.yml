@@ -59,7 +59,7 @@ jobs:
         shell: bash
         run: |
           TAG_NAME="${{ github.event.release.tag_name }}"
-          PUBLISH_ARGS=(--provenance)
+          PUBLISH_ARGS=(--provenance --access public)
           if [[ "$TAG_NAME" =~ -(alpha|beta|rc)($|\.) ]]; then
             PRERELEASE_TAG="${BASH_REMATCH[1]}"
             echo "Detected prerelease version, publishing with --tag $PRERELEASE_TAG"
